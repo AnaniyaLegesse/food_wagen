@@ -9,11 +9,10 @@ import Hero from "@/pages/Hero";
 const page = () => {
   
   return (
-    <div className="min-h-screen bg-gray-50 font-sans antialiased">
+    <div className="min-h-screen font-sans antialiased">
       <Navbar />
       <Hero />
-      <FeaturedMeals />
-      <Footer/>
+      <FeaturedMeals />   
     </div>
   );
 }
