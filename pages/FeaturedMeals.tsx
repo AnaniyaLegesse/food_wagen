@@ -1,16 +1,7 @@
 'use client'
 
-import MealCard from "@/components/meal_card";
 import useFetch from "@/hook/useFetch";
-
-
-// Helper function to generate random ratings and status
-const getRandomData = (id: number) => {
-  const rating = ((id % 5) + 3) + Math.random().toFixed(1);
-  const isClosed = id % 3 === 0;
-  const reviews = Math.floor(Math.random() * 200) + 1;
-  return { rating, isClosed, reviews };
-};
+import MealCard from "@/components/MealCard";
 
 const FeaturedMeals = () => {
   const { data, loading, error } = useFetch('https://6852821e0594059b23cdd834.mockapi.io/Food');
@@ -36,19 +27,21 @@ const FeaturedMeals = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Meal Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {data && data.map((meal: any) => {
-            const { rating, isClosed, reviews } = getRandomData(meal.id);
-            
-            return (
-              <MealCard 
-                key={meal.id}
-                meal={meal}
-                rating={rating}
-                isClosed={isClosed}
-                reviews={reviews}
-              />
-            );
-          })}
+          {data && data.map((meal: any) => (
+            <MealCard 
+              key={meal.id}
+              meal={{
+                id: meal.id,
+                name: meal.name || meal.food_name,
+                price: meal.price || meal.Price,
+                image: meal.image || meal.food_image || meal.avatar,
+                rating: meal.rating || meal.food_rating,
+                open: meal.open || meal.restaurant?.isOpen || meal.restaurant_status === 'Open Now',
+                restaurantName: meal.restaurantName || meal.restaurant_name,
+                restaurant: meal.restaurant
+              }}
+            />
+          ))}
         </div>
 
         {/* Load More Button */}

@@ -1,6 +1,5 @@
 "use client";
 
-import Footer from "@/components/footer";
 import Navbar from "@/components/navbar";
 import FeaturedMeals from "@/pages/FeaturedMeals";
 import Hero from "@/pages/Hero";
