@@ -1,6 +1,6 @@
 'use client'
 
-import useFetch from "@/hook/useFetch";
+import useFetch from "@/hook/api";
 import MealCard from "@/components/MealCard";
 
 const FeaturedMeals = () => {

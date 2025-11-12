@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 
 const Hero = () => {
-    const [mode, setMode] = useState('Delivery');
+  const [mode, setMode] = useState('Delivery');
   const activeClass = "bg-orange-100 text-orange-600 shadow-lg";
   const inactiveClass = "bg-white text-gray-500 hover:bg-orange-100";
 

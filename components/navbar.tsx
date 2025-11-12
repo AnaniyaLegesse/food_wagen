@@ -1,32 +1,29 @@
 import React, { useState } from 'react';
 import AddMealModal from './AddMealModal';
 
-interface Meal {
-  id: string;
-  name: string;
-  price: string;
-  image: string;
-  rating: number;
-  open: boolean;
-  restaurantName: string;
-  restaurant?: {
-    name: string;
-    logo: string;
-    isOpen: boolean;
-  };
-}
-
 interface NavbarProps {
-  onAddMeal?: (meal: Omit<Meal, 'id'> & { id?: string }) => void;
+  onAddMeal?: (meal: any) => void;
 }
 
 const Navbar = ({ onAddMeal }: NavbarProps) => {
   const [showAddModal, setShowAddModal] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleAddMeal = (newMeal: Omit<Meal, 'id'> & { id?: string }) => {
-    // Pass the new meal data to the parent component
-    onAddMeal?.(newMeal);
-    setShowAddModal(false);
+  const handleAddMeal = async (newMeal: any) => {
+    setIsLoading(true);
+    
+    try {
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      // Pass the new meal data to the parent component
+      onAddMeal?.(newMeal);
+      setShowAddModal(false);
+    } catch (error) {
+      console.error('Error adding meal:', error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -48,6 +45,7 @@ const Navbar = ({ onAddMeal }: NavbarProps) => {
         <AddMealModal
           onSave={handleAddMeal}
           onClose={() => setShowAddModal(false)}
+          isLoading={isLoading}
         />
       )}
     </>
